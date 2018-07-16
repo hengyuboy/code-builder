@@ -1,0 +1,128 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.gitee.hengboy</groupId>
+  <artifactId>code-builder</artifactId>
+  <packaging>maven-plugin</packaging>
+  <version>1.0.0.RELEASE</version>
+  <name>code-builder Maven Mojo</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+    <maven.plugin.api.version>2.0</maven.plugin.api.version>
+    <maven.plugin.annotation.version>3.5.2</maven.plugin.annotation.version>
+    <lombok.version>1.16.20</lombok.version>
+    <freemarker.version>2.3.28</freemarker.version>
+    <slf4j.version>1.7.25</slf4j.version>
+  </properties>
+
+  <dependencies>
+    <!--Maven插件 api依赖-->
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-plugin-api</artifactId>
+      <version>${maven.plugin.api.version}</version>
+    </dependency>
+    <!--Maven 插件注解依赖-->
+    <dependency>
+      <groupId>org.apache.maven.plugin-tools</groupId>
+      <artifactId>maven-plugin-annotations</artifactId>
+      <version>${maven.plugin.annotation.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!--Lombok依赖-->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${lombok.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!--freemarker模板依赖-->
+    <dependency>
+      <groupId>org.freemarker</groupId>
+      <artifactId>freemarker</artifactId>
+      <version>${freemarker.version}</version>
+    </dependency>
+
+    <!--日志依赖-->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <developers>
+    <developer>
+      <name>Yu Qi Yu</name>
+      <email>yuqiyu@vip.qq.com</email>
+      <organization>gitee</organization>
+      <organizationUrl>https://gitee.com/hengboy</organizationUrl>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:https://gitee.com/hengboy/code-builder</connection>
+    <developerConnection>scm:git:https://gitee.com/hengboy/code-builder</developerConnection>
+    <url>https://gitee.com/hengboy/code-builder</url>
+    <tag>1.0.0.RELEASE</tag>
+  </scm>
+  <distributionManagement>
+    <snapshotRepository>
+      <id>code-builder</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>code-builder</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
+  <build>
+    <plugins>
+      <!-- Source -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.0.1</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- Javadoc -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.10.4</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- Gpg Signature -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.6</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
