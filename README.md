@@ -5,6 +5,8 @@
 ### 加入群聊
 SpringBoot 核心技术①：373229384 （满）
 SpringBoot 核心技术②：588351309
+Mybatis Enhance ：782540319
+
 ### 背景
 本来`code-builder`是专门为`MyBatis Enhance`来编写的一块代码生成器
 ### code-builder可以用来做什么？
