@@ -15,7 +15,12 @@ package com.gitee.hengboy.builder;
  *  limitations under the License.
  */
 
-import com.gitee.hengboy.builder.common.*;
+import com.gitee.hengboy.builder.common.CodeBuilderProperties;
+import com.gitee.hengboy.builder.common.enums.DbTypeEnum;
+import com.gitee.hengboy.builder.common.enums.EngineTypeEnum;
+import com.gitee.hengboy.builder.common.enums.ErrorEnum;
+import com.gitee.hengboy.builder.common.exception.CodeBuilderException;
+import com.gitee.hengboy.builder.common.util.StringUtil;
 import com.gitee.hengboy.builder.core.configuration.BuilderConfiguration;
 import com.gitee.hengboy.builder.core.database.DataBase;
 import com.gitee.hengboy.builder.core.database.DataBaseFactory;
@@ -217,6 +222,6 @@ public class CodeBuilderMojo
             getLog().info("Using expression method to generate code automatically, please wait...");
             return dataBase.getTableNames(generatorByPattern);
         }
-        throw new RuntimeException(ErrorEnum.NO_BUILDER_TABLE.getMessage());
+        throw new CodeBuilderException(ErrorEnum.NO_BUILDER_TABLE);
     }
 }

@@ -1,4 +1,4 @@
-package com.gitee.hengboy.builder.common;
+package com.gitee.hengboy.builder.common.enums;
 /**
  *  Copyright 2018 恒宇少年
  *

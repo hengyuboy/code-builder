@@ -14,7 +14,7 @@ package com.gitee.hengboy.builder.core.database.model.util;
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-import com.gitee.hengboy.builder.common.JavaTypeEnum;
+import com.gitee.hengboy.builder.common.enums.JavaTypeEnum;
 
 import java.sql.Types;
 import java.util.HashMap;

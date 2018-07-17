@@ -14,10 +14,12 @@ package com.gitee.hengboy.builder.core.database;
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
 import com.gitee.hengboy.builder.common.CodeBuilderProperties;
-import com.gitee.hengboy.builder.common.ErrorEnum;
-import com.gitee.hengboy.builder.common.StringUtil;
-import com.gitee.hengboy.builder.common.TableMetaDataEnum;
+import com.gitee.hengboy.builder.common.enums.ErrorEnum;
+import com.gitee.hengboy.builder.common.enums.TableMetaDataEnum;
+import com.gitee.hengboy.builder.common.exception.CodeBuilderException;
+import com.gitee.hengboy.builder.common.util.StringUtil;
 import com.gitee.hengboy.builder.core.database.model.Column;
 import com.gitee.hengboy.builder.core.database.model.Table;
 import com.gitee.hengboy.builder.core.database.model.util.JavaTypeResolver;
@@ -85,7 +87,7 @@ public abstract class AbstractDataBase implements DataBase {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        throw new RuntimeException(ErrorEnum.NOT_GET_CONNECTION.getMessage());
+        throw new CodeBuilderException(ErrorEnum.NOT_GET_CONNECTION);
     }
 
     /**
@@ -122,7 +124,7 @@ public abstract class AbstractDataBase implements DataBase {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        throw new RuntimeException(ErrorEnum.NOT_GET_TABLE.getMessage());
+        throw new CodeBuilderException(ErrorEnum.NOT_GET_TABLE);
     }
 
     /**
@@ -146,7 +148,7 @@ public abstract class AbstractDataBase implements DataBase {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        throw new RuntimeException(ErrorEnum.NOT_GET_TABLE.getMessage());
+        throw new CodeBuilderException(ErrorEnum.NOT_GET_TABLE);
     }
 
     /**
@@ -258,7 +260,7 @@ public abstract class AbstractDataBase implements DataBase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        throw new RuntimeException(String.format(ErrorEnum.NOT_GET_COLUMN.getMessage(), tableName));
+        throw new CodeBuilderException(ErrorEnum.NOT_GET_COLUMN, tableName);
     }
 
     /**
@@ -334,7 +336,7 @@ public abstract class AbstractDataBase implements DataBase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        throw new RuntimeException(String.format(ErrorEnum.NOT_GET_PRIMARY_KEYS.getMessage(), tableName));
+        throw new CodeBuilderException(ErrorEnum.NOT_GET_PRIMARY_KEYS, tableName);
     }
 
     /**

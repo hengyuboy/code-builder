@@ -15,7 +15,7 @@ package com.gitee.hengboy.builder.core.engine.impl;
  *  limitations under the License.
  */
 import com.gitee.hengboy.builder.common.CodeBuilderProperties;
-import com.gitee.hengboy.builder.common.EngineTypeEnum;
+import com.gitee.hengboy.builder.common.enums.EngineTypeEnum;
 import com.gitee.hengboy.builder.core.configuration.BuilderConfiguration;
 import com.gitee.hengboy.builder.core.configuration.TemplateConfiguration;
 import com.gitee.hengboy.builder.core.database.DataBase;

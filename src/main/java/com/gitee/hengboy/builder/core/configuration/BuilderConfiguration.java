@@ -14,7 +14,7 @@ package com.gitee.hengboy.builder.core.configuration;
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-import com.gitee.hengboy.builder.common.StringUtil;
+import com.gitee.hengboy.builder.common.util.StringUtil;
 import lombok.Data;
 
 import java.io.File;

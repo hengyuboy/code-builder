@@ -14,9 +14,11 @@ package com.gitee.hengboy.builder.core.database;
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
 import com.gitee.hengboy.builder.common.CodeBuilderProperties;
-import com.gitee.hengboy.builder.common.DbTypeEnum;
-import com.gitee.hengboy.builder.common.ErrorEnum;
+import com.gitee.hengboy.builder.common.enums.DbTypeEnum;
+import com.gitee.hengboy.builder.common.enums.ErrorEnum;
+import com.gitee.hengboy.builder.common.exception.CodeBuilderException;
 
 import java.lang.reflect.Constructor;
 
@@ -54,7 +56,7 @@ public class DataBaseFactory {
             return (DataBase) constructor.newInstance(codeBuilderProperties);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException(ErrorEnum.NOT_ALLOW_DB_TYPE.getMessage());
+            throw new CodeBuilderException(ErrorEnum.NOT_ALLOW_DB_TYPE);
         }
     }
 }

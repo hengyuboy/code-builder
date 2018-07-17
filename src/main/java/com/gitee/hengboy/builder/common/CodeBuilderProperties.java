@@ -14,6 +14,7 @@ package com.gitee.hengboy.builder.common;
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+import com.gitee.hengboy.builder.common.enums.DbTypeEnum;
 import com.gitee.hengboy.builder.core.configuration.BuilderConfiguration;
 import lombok.Builder;
 import lombok.Data;

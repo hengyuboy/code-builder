@@ -17,8 +17,8 @@ package com.gitee.hengboy.builder.core.database.model;
  *  limitations under the License.
  */
 import com.gitee.hengboy.builder.common.CodeBuilderProperties;
-import com.gitee.hengboy.builder.common.JavaTypeEnum;
-import com.gitee.hengboy.builder.common.StringUtil;
+import com.gitee.hengboy.builder.common.enums.JavaTypeEnum;
+import com.gitee.hengboy.builder.common.util.StringUtil;
 import lombok.Builder;
 import lombok.Data;
 

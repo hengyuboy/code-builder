@@ -14,9 +14,11 @@ package com.gitee.hengboy.builder.core.engine;
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
 import com.gitee.hengboy.builder.common.CodeBuilderProperties;
-import com.gitee.hengboy.builder.common.EngineTypeEnum;
-import com.gitee.hengboy.builder.common.ErrorEnum;
+import com.gitee.hengboy.builder.common.enums.EngineTypeEnum;
+import com.gitee.hengboy.builder.common.enums.ErrorEnum;
+import com.gitee.hengboy.builder.common.exception.CodeBuilderException;
 import com.gitee.hengboy.builder.core.database.DataBase;
 
 import java.lang.reflect.Constructor;
@@ -52,6 +54,6 @@ public class EngineTemplateFactory {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        throw new RuntimeException(ErrorEnum.NOT_ALLOW_ENGINE.getMessage());
+        throw new CodeBuilderException(ErrorEnum.NOT_ALLOW_ENGINE);
     }
 }

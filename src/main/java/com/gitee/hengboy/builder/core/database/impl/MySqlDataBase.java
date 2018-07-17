@@ -15,7 +15,8 @@ package com.gitee.hengboy.builder.core.database.impl;
  *  limitations under the License.
  */
 import com.gitee.hengboy.builder.common.CodeBuilderProperties;
-import com.gitee.hengboy.builder.common.ErrorEnum;
+import com.gitee.hengboy.builder.common.enums.ErrorEnum;
+import com.gitee.hengboy.builder.common.exception.CodeBuilderException;
 import com.gitee.hengboy.builder.core.database.AbstractDataBase;
 
 import java.sql.PreparedStatement;
@@ -66,6 +67,6 @@ public class MySqlDataBase extends AbstractDataBase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        throw new RuntimeException(String.format(ErrorEnum.NOT_GET_COMMENT.getMessage(), tableName));
+        throw new CodeBuilderException(ErrorEnum.NOT_GET_COMMENT, tableName);
     }
 }
