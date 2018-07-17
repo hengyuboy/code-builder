@@ -21,6 +21,7 @@ import com.gitee.hengboy.builder.core.configuration.TemplateConfiguration;
 import com.gitee.hengboy.builder.core.database.DataBase;
 import com.gitee.hengboy.builder.core.database.model.Table;
 import com.gitee.hengboy.builder.core.engine.AbstractEngineTemplate;
+import com.gitee.hengboy.builder.core.engine.model.DataModelEntity;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
@@ -90,7 +91,10 @@ public class FreemarkerEngineImpl extends AbstractEngineTemplate {
                 // 写入freemarker模板内容
                 Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), DEFAULT_ENCODING));
                 // 执行生成
-                template.process(table, out);
+                template.process(DataModelEntity.builder()
+                        .config(builderConfiguration)
+                        .table(table)
+                        .build(), out);
             }
 
         } catch (Exception e) {

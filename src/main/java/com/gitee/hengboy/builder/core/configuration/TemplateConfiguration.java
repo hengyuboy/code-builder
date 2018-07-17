@@ -31,7 +31,7 @@ import lombok.Data;
 public class TemplateConfiguration {
     /**
      * 模板名称
-     * 如：entity.ftl
+     * 如：model.ftl
      */
     private String name;
     /**

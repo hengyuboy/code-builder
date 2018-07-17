@@ -4,9 +4,10 @@
   <groupId>com.gitee.hengboy</groupId>
   <artifactId>code-builder</artifactId>
   <packaging>maven-plugin</packaging>
-  <version>1.0.0.RELEASE</version>
-  <name>code-builder Maven Mojo</name>
+  <version>1.0.1.RELEASE</version>
+  <name>code-builder</name>
   <url>http://maven.apache.org</url>
+
   <properties>
     <maven.plugin.api.version>2.0</maven.plugin.api.version>
     <maven.plugin.annotation.version>3.5.2</maven.plugin.annotation.version>
@@ -16,13 +17,13 @@
   </properties>
 
   <dependencies>
-    <!--Maven插件 api依赖-->
+    <!--Maven api-->
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-plugin-api</artifactId>
       <version>${maven.plugin.api.version}</version>
     </dependency>
-    <!--Maven 插件注解依赖-->
+    <!--Maven Annotation-->
     <dependency>
       <groupId>org.apache.maven.plugin-tools</groupId>
       <artifactId>maven-plugin-annotations</artifactId>
@@ -30,7 +31,7 @@
       <scope>provided</scope>
     </dependency>
 
-    <!--Lombok依赖-->
+    <!--Lombok-->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
@@ -38,14 +39,14 @@
       <scope>provided</scope>
     </dependency>
 
-    <!--freemarker模板依赖-->
+    <!--freemarker-->
     <dependency>
       <groupId>org.freemarker</groupId>
       <artifactId>freemarker</artifactId>
       <version>${freemarker.version}</version>
     </dependency>
 
-    <!--日志依赖-->
+    <!--slf4j-->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
@@ -58,6 +59,7 @@
     <developer>
       <name>Yu Qi Yu</name>
       <email>yuqiyu@vip.qq.com</email>
+      <url>https://www.jianshu.com/u/092df3f77bca</url>
       <organization>gitee</organization>
       <organizationUrl>https://gitee.com/hengboy</organizationUrl>
     </developer>
@@ -66,15 +68,15 @@
     <connection>scm:git:https://gitee.com/hengboy/code-builder</connection>
     <developerConnection>scm:git:https://gitee.com/hengboy/code-builder</developerConnection>
     <url>https://gitee.com/hengboy/code-builder</url>
-    <tag>1.0.0.RELEASE</tag>
+    <tag>1.0.1.RELEASE</tag>
   </scm>
   <distributionManagement>
     <snapshotRepository>
-      <id>code-builder</id>
+      <id>hengyu</id>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
     <repository>
-      <id>code-builder</id>
+      <id>hengyu</id>
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
   </distributionManagement>
