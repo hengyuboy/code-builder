@@ -1,19 +1,20 @@
 package com.gitee.hengboy.builder.core.engine;
 /**
- *  Copyright 2018 恒宇少年
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Copyright 2018 恒宇少年
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
 import com.gitee.hengboy.builder.common.CodeBuilderProperties;
 import com.gitee.hengboy.builder.common.util.StringUtil;
 import com.gitee.hengboy.builder.core.configuration.BuilderConfiguration;
@@ -57,6 +58,10 @@ public abstract class AbstractEngineTemplate implements EngineTemplate {
      * 自动生成文件的后缀名
      */
     protected static final String FILE_SUFFIX = ".java";
+    /**
+     * package 分隔符
+     */
+    protected static final String PACKAGE_SPLIT = ".";
 
     /**
      * 构造函数初始化数据库对象实例、代码生成配置实体
@@ -135,12 +140,30 @@ public abstract class AbstractEngineTemplate implements EngineTemplate {
     }
 
     /**
+     * 获取模板创建文件后的包名
+     *
+     * @param templateConfiguration 模板配置对象
+     * @return 包名
+     */
+    protected String getTemplatePackageName(TemplateConfiguration templateConfiguration) {
+        // 包名前缀
+        StringBuffer packageName = new StringBuffer(codeBuilderProperties.getBuilder().getPackagePrefix());
+        // 默认包名
+        if (StringUtil.isNotEmpty(templateConfiguration.getPackageName())) {
+            packageName.append(PACKAGE_SPLIT);
+            // 转换为小写
+            packageName.append(templateConfiguration.getPackageName().toLowerCase());
+        }
+        return packageName.toString();
+    }
+
+    /**
      * 获取生成目标目录 + package目录格式化后的根地址
      *
-     * @param builderConfiguration 代理生成配置信息
      * @return 存在包名的目录根路径
      */
-    protected String getBasePackageTargetDir(BuilderConfiguration builderConfiguration) {
+    protected String getBasePackageTargetDir() {
+        BuilderConfiguration builderConfiguration = codeBuilderProperties.getBuilder();
         StringBuffer basePackageDir = new StringBuffer();
         // 生成文件的目标根路径
         basePackageDir.append(getBaseTargetDir());
@@ -155,30 +178,42 @@ public abstract class AbstractEngineTemplate implements EngineTemplate {
     }
 
     /**
+     * 获取模板生成文件后的类名
+     *
+     * @param templateConfiguration 默认配置信息
+     * @param entityName            数据表对应的实体名称
+     * @return Class 名称
+     */
+    protected String getTemplateClassName(TemplateConfiguration templateConfiguration, String entityName) {
+        StringBuffer className = new StringBuffer();
+        className.append(entityName);
+        if (StringUtil.isNotEmpty(templateConfiguration.getFileSuffix())) {
+            // 首字母大写
+            className.append(StringUtil.getCamelCaseString(templateConfiguration.getFileSuffix(), true));
+        }
+        return className.toString();
+    }
+
+    /**
      * 获取新文件的全名称
      * 如：XxxEntity.java
      *
-     * @param builderConfiguration  配置对象
      * @param templateConfiguration 模板配置对象
-     * @param className             类名
+     * @param entityName            数据表对应的实体名称
      * @return 新文件名称
      */
-    protected String getNewFileName(BuilderConfiguration builderConfiguration, TemplateConfiguration templateConfiguration, String className) {
+    protected String getTemplateNewFileName(TemplateConfiguration templateConfiguration, String entityName) {
         StringBuffer fileName = new StringBuffer();
         // 目标package的根目录
-        fileName.append(getBasePackageTargetDir(builderConfiguration));
+        fileName.append(getBasePackageTargetDir());
 
         // 是否配置了模板创建文件后所属的package目录
         if (StringUtil.isNotEmpty(templateConfiguration.getPackageName())) {
             fileName.append(templateConfiguration.getPackageName());
             fileName.append(SEPARATOR);
         }
-        // 文件名
-        fileName.append(className);
-        // 是否添加文件的后缀
-        if (StringUtil.isNotEmpty(templateConfiguration.getFileSuffix())) {
-            fileName.append(templateConfiguration.getFileSuffix());
-        }
+        // 类名
+        fileName.append(getTemplateClassName(templateConfiguration, entityName));
         // 文件扩展名
         fileName.append(FILE_SUFFIX);
         return fileName.toString();
@@ -190,13 +225,12 @@ public abstract class AbstractEngineTemplate implements EngineTemplate {
      * 如：com.code.builder
      * 则自动创建com/code/builder文件夹
      *
-     * @param builderConfiguration  代码生成配置信息
      * @param templateConfiguration 模板配置
      */
-    protected void loopCreatePackage(BuilderConfiguration builderConfiguration, TemplateConfiguration templateConfiguration) {
+    protected void loopCreatePackage(TemplateConfiguration templateConfiguration) {
         // 目录地址
         StringBuffer basePackagePath = new StringBuffer();
-        basePackagePath.append(getBasePackageTargetDir(builderConfiguration));
+        basePackagePath.append(getBasePackageTargetDir());
         // 模板生成文件目标独有的package
         if (StringUtil.isNotEmpty(templateConfiguration.getPackageName())) {
             basePackagePath.append(templateConfiguration.getPackageName());

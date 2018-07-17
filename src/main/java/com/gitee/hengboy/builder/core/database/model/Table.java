@@ -2,20 +2,21 @@
 package com.gitee.hengboy.builder.core.database.model;
 
 /**
- *  Copyright 2018 恒宇少年
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Copyright 2018 恒宇少年
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
 import com.gitee.hengboy.builder.common.CodeBuilderProperties;
 import com.gitee.hengboy.builder.common.enums.JavaTypeEnum;
 import com.gitee.hengboy.builder.common.util.StringUtil;
@@ -54,9 +55,9 @@ public class Table {
      */
     private String remark;
     /**
-     * 数据实体名称
+     * 实体名称
      */
-    private String className;
+    private String entityName;
     /**
      * catalog
      */
@@ -110,7 +111,7 @@ public class Table {
         }
         // 自动忽略前缀
         if (StringUtil.isNotEmpty(codeBuilderProperties.getIgnoreClassPrefix())) {
-            className = className.replaceFirst(codeBuilderProperties.getIgnoreClassPrefix(), "");
+            entityName = entityName.replaceFirst(codeBuilderProperties.getIgnoreClassPrefix(), "");
         }
         return this;
     }

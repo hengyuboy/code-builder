@@ -1,19 +1,20 @@
 package com.gitee.hengboy.builder.core.engine.impl;
 /**
- *  Copyright 2018 恒宇少年
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Copyright 2018 恒宇少年
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
 import com.gitee.hengboy.builder.common.CodeBuilderProperties;
 import com.gitee.hengboy.builder.common.enums.EngineTypeEnum;
 import com.gitee.hengboy.builder.core.configuration.BuilderConfiguration;
@@ -31,8 +32,7 @@ import java.util.Locale;
 /**
  * 使用freemarker模板驱动实现类
  *
- * @author：于起宇
- * ===============================
+ * @author：于起宇 ===============================
  * Created with IDEA.
  * Date：2018/7/8
  * Time：5:20 PM
@@ -83,18 +83,28 @@ public class FreemarkerEngineImpl extends AbstractEngineTemplate {
             // 遍历生成文件
             for (TemplateConfiguration templateConfiguration : builderConfiguration.getTemplates()) {
                 // 创建package
-                loopCreatePackage(builderConfiguration, templateConfiguration);
+                loopCreatePackage(templateConfiguration);
                 // freemarker模板
                 Template template = configuration.getTemplate(templateConfiguration.getName());
                 // 创建文件
-                File file = new File(getNewFileName(builderConfiguration, templateConfiguration, table.getClassName()));
+                File file = new File(getTemplateNewFileName(templateConfiguration, table.getEntityName()));
                 // 写入freemarker模板内容
                 Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), DEFAULT_ENCODING));
-                // 执行生成
-                template.process(DataModelEntity.builder()
-                        .config(builderConfiguration)
+
+                /*
+                 * 构建数据模型实体
+                 * 1. 设置当前模板创建类的包名
+                 * 2. 设置当前模板创建类的类名
+                 * 3. 设置数据表格对象
+                 */
+                DataModelEntity dataModelEntity = DataModelEntity.builder()
+                        .packageName(getTemplatePackageName(templateConfiguration))
+                        .className(getTemplateClassName(templateConfiguration, table.getEntityName()))
                         .table(table)
-                        .build(), out);
+                        .build();
+
+                // 执行生成
+                template.process(dataModelEntity, out);
             }
 
         } catch (Exception e) {

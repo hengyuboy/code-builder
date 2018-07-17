@@ -167,7 +167,7 @@ public abstract class AbstractDataBase implements DataBase {
                         // 表名
                         .tableName(tableName)
                         // 实体类名称
-                        .className(StringUtil.getCamelCaseString(tableName, true))
+                        .entityName(StringUtil.getCamelCaseString(tableName, true))
                         // 表类别
                         .catalog(resultSet.getString(TableMetaDataEnum.TABLE_CAT.getValue()))
                         // 表模式
