@@ -155,8 +155,160 @@ SpringBoot 核心技术②：588351309
 
 使用前`AppUserInfoEntity`，使用后`UserInfoEntity`。
 
+#### 模板配置
+使用`templates`标签配置自定义的模板列表，一次可以使用单个或者多个模板进行生成，如下配置：
+```
+<templates>
+    <template>
+        <name>entity.ftl</name>
+        <packageName>entity</packageName>
+        <fileSuffix>entity</fileSuffix>
+    </template>
+    <template>
+        <name>service.ftl</name>
+        <packageName>service</packageName>
+        <fileSuffix>Service</fileSuffix>
+    </template>
+    <template>
+        <name>mapper.ftl</name>
+        <packageName>mapper</packageName>
+        <fileSuffix>Mapper</fileSuffix>
+    </template>
+</templates>
+```
+- `name` ：`freemarker`目录下模板的名称，`必填`
+- `packageName`：生成该模板文件后的子包名称，`非必填`
+- `fileSuffix`：生成文件的后缀，如：配置后缀为`Entity`，则添加后缀后的文件名为`UserInfoEntity`
+
 ### 内置参数
+模板驱动数据模型内置了部分参数，`code-builder`准备的每一个参数都是在生成实体类时都可能会用到的。
+#### Table参数
+- `tableName` `表名`，数据类型：`java.lang.String` 
+- `remark`  `表备注信息`，数据类型：`java.lang.String`
+- `entityName`  `实体类名称`，如：`user_info`转换为`userInfo`，数据类型：`java.lang.String`
+- `columns`  `列列表`，数据类型：`java.util.List<Column>`
+- `primaryKeys` `主键列表`，数据类型：`java.util.List<Column>`
+- `hasSqlDate` 是否存在`java.sql.Date`类型，`true`：存在，`false`：不存在，数据类型：`java.lang.Boolean`
+- `hasTimeStamp` 是否存在`java.sql.TimeStamp`类型，`true`：存在，`false`：不存在，数据类型：`java.lang.Boolean`
+- `hasBigDecimal` 是否存在`java.math.BigDecimal`类型，`true`：存在，`false`：不存在，数据类型：`java.lang.Boolean`
 
+##### 使用方式
+> `freemarker模板`：`${table.xxx}`，如表名的使用为`${table.tableName}`
+	
+#### Column参数
+- `columnName` `列名`，如：`user_id`，数据类型：`java.lang.String`
+- `primaryKey` `是否为主键`，数据类型：`java.lang.Boolean`，`true`：主键，`false`：非主键
+- `foreignKey` `是否为外键`，数据类型：`java.lang.Boolean`，`true`：外键，`false`：非外键
+- `size` `列长度`，数据类型：`java.lang.Integer`
+- `decimalDigits` `小数点精度`，数据类型：`java.lang.Integer`
+- `nullable` `列是否为空`，数据类型：`java.lang.Boolean`，`true`：为空，`false`：非空
+- `autoincrement` `是否自增`，数据类型：`java.lang.Boolean`，`true`：自增列，`false`：普通列
+- `defaultValue` `默认值`，数据类型：`java.lang.String`
+- `remark` `列备注`，数据类型：`java.lang.String`
+- `jdbcType` `JDBC类型`，对应`java.sql.Types`内类型，数据类型：`java.lang.Integer`
+- `jdbcTypeName` `JDBC类型名称`，数据类型：`java.lang.String`
+- `javaProperty` `格式化后的属性名称`，如：`userId`，数据类型：`java.lang.String`
+- `javaType` `Java数据类型短名`，如：`TimeStamp`，数据类型：`java.lang.String`
+- `fullJavaType` `Java数据类型全名`，如：`java.sql.TimeStamp`，数据类型：`java.lang.String`
+##### 使用方式
+> `freemarker模板`：`${column.xxx}`，如列名的使用为`${column.columnName}`
+#### 基础参数
+- `className`：Class名称，freemarker指定模板生成文件的类名，模板内配置`${className}`使用
+- `packageName`：Package名称，freemarker指定模板生成文件的包名，模板内配置`${packageName}`使用
+### 怎么自定义模板？
+下面提供一个简单的模板示例，根据上面的`内置参数`可以任意自定义生成文件的内容。
+```
+<#if (packageName)??>
+package ${packageName};
+</#if>
+import lombok.Data;
+
+<#if (table.hasSqlDate)>
+import java.sql.Date;
+</#if>
+<#if (table.hasTimeStamp)>
+import java.sql.Timestamp;
+</#if>
+<#if (table.hasBigDecimal)>
+import java.math.BigDecimal;
+</#if>
+/**
+ * <p>本类代码由code-builder自动生成</p>
+ * <p>表名: ${table.tableName} - ${table.remark}</p>
+ * ===============================
+ * Created with code-builder.
+ * User：恒宇少年
+ * Date：${.now}
+ * 简书：http://www.jianshTu.com/u/092df3f77bca
+ * 码云：https://gitee.com/hengboy
+ * ================================
+ */
+@Data
+public class ${className} {
+<#list table.primaryKeys as key>
+    /**
+     * ${key.columnName} - ${key.remark}
+     */
+    private ${key.javaType} ${key.javaProperty};
+</#list>
+<#list table.columns as column>
+    <#if (!column.primaryKey)>
+    /**
+     * ${column.columnName} - ${column.remark}
+     */
+    private ${column.javaType} ${column.javaProperty};
+    </#if>
+</#list>
+}
+```
+上面是一个数据实体的`freemarker`模板内容，把这个模板存放到`freemarker`目录下，对应在`templates`标签内添加配置就可以完成数据实体的自动创建，创建后的数据实体内容如下所示：
+```
+package com.code.builder.sample.model;
+import lombok.Data;
+
+import java.sql.Timestamp;
+/**
+ * <p>本类代码由code-builder自动生成</p>
+ * <p>表名: app_balance_type - 余额类型信息表</p>
+ * ===============================
+ * Created with code-builder.
+ * User：恒宇少年
+ * Date：Jul 17, 2018 9:09:13 PM
+ * 简书：http://www.jianshTu.com/u/092df3f77bca
+ * 码云：https://gitee.com/hengboy
+ * ================================
+ */
+@Data
+public class BalanceTypeEntity {
+    /**
+     * BT_ID - 余额类型主键
+     */
+    private String btId;
+    /**
+     * BT_NAME - 余额类型名称
+     */
+    private String btName;
+    /**
+     * BT_FLAG - 余额类型标识
+     */
+    private String btFlag;
+    /**
+     * BT_CREATE_TIME - 添加时间
+     */
+    private Timestamp btCreateTime;
+    /**
+     * BT_MARK - 余额类型备注信息
+     */
+    private String btMark;
+}
+```
+### 创建的实体类去了哪里？
+创建的实体类会在`target/generated-sources/java`目录下，如果你配置`packagePrefix`参数，会自动在生成目录下创建`packagePrefix`配置值的子目录。
+如：
+```
+<packagePrefix>com.code.builder.sample</packagePrefix>
+```
+则最终创建的生成根目录为：`target/generated-sources/java/com/code/builder/sample`
 ### 怎么使用？
-
-### 下一版本更新内容
+1. 执行`mvn clean`命令用于清空`target`目录下的内容
+2. 执行`mvn compile`命令编译项目并且生成`实体类`

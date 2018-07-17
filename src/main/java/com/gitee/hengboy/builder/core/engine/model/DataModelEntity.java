@@ -25,10 +25,12 @@ public class DataModelEntity {
     private Table table;
     /**
      * 类名
+     * 如：UserInfoEntity
      */
     private String className;
     /**
      * 包名
+     * 如：com.xxx.xxx.user
      */
     private String packageName;
 }

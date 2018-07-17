@@ -61,7 +61,8 @@ public class FreemarkerEngineImpl extends AbstractEngineTemplate {
 
     /**
      * 设置freemarker全局配置参数
-     */ {
+     */
+    {
         try {
             configuration.setDirectoryForTemplateLoading(new File(getBaseBuilderDir() + EngineTypeEnum.FREEMARKER.getTemplateDirName()));
             configuration.setDefaultEncoding(DEFAULT_ENCODING);
