@@ -30,7 +30,7 @@ Mybatis Enhance ：782540319
 <plugin>
     <groupId>com.gitee.hengboy</groupId>
     <artifactId>code-builder</artifactId>
-    <version>1.0.0.RELEASE</version>
+    <version>1.0.2.RELEASE</version>
     <executions>
         <execution>
             <goals>
