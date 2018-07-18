@@ -180,7 +180,7 @@ Mybatis Enhance ：782540319
 ```
 - `name` ：`freemarker`目录下模板的名称，`必填`
 - `packageName`：生成该模板文件后的子包名称，`非必填`
-- `fileSuffix`：生成文件的后缀，如：配置后缀为`Entity`，则添加后缀后的文件名为`UserInfoEntity`
+- `fileSuffix`：生成文件的后缀，如：配置后缀为`Entity`，则添加后缀后的文件名为`UserInfoEntity`，后缀首字母会自动根据驼峰转换成大写
 
 ### 内置参数
 模板驱动数据模型内置了部分参数，`code-builder`准备的每一个参数都是在生成实体类时都可能会用到的。
