@@ -15,10 +15,12 @@ package com.gitee.hengboy.builder.common;
  *  limitations under the License.
  */
 import com.gitee.hengboy.builder.common.enums.DbTypeEnum;
+import com.gitee.hengboy.builder.common.enums.EngineTypeEnum;
 import com.gitee.hengboy.builder.core.configuration.BuilderConfiguration;
 import lombok.Builder;
 import lombok.Data;
 
+import javax.sql.DataSource;
 import java.io.File;
 import java.util.List;
 
@@ -32,21 +34,32 @@ import java.util.List;
  * Time：4:58 PM
  * 简书：http://www.jianshu.com/u/092df3f77bca
  * ================================
- * @see com.gitee.hengboy.builder.CodeBuilderMojo
  */
 @Data
 @Builder
 public class CodeBuilderProperties {
     private boolean execute;
+
+    /**
+     * maven-plugin形式所需参数
+     * 数据库配置信息
+     */
     private String dbName;
     private String dbUserName;
     private String dbPassword;
     private String dbUrl;
     private String dbDriverClassName;
+    /**
+     * 数据源
+     * spring-boot-starter形式直接配置
+     */
+    private DataSource dataSource;
+
     private String ignoreClassPrefix;
     private List<String> tables;
     private String generatorByPattern;
     private DbTypeEnum dbType;
+    private EngineTypeEnum engineTypeEnum;
     private String projectBaseDir;
     private String builderDir;
     private String targetDir;

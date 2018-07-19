@@ -1,31 +1,25 @@
 package com.gitee.hengboy.builder;
 /**
- *  Copyright 2018 恒宇少年
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Copyright 2018 恒宇少年
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import com.gitee.hengboy.builder.common.CodeBuilderProperties;
 import com.gitee.hengboy.builder.common.enums.DbTypeEnum;
 import com.gitee.hengboy.builder.common.enums.EngineTypeEnum;
-import com.gitee.hengboy.builder.common.enums.ErrorEnum;
-import com.gitee.hengboy.builder.common.exception.CodeBuilderException;
-import com.gitee.hengboy.builder.common.util.StringUtil;
 import com.gitee.hengboy.builder.core.configuration.BuilderConfiguration;
-import com.gitee.hengboy.builder.core.database.DataBase;
-import com.gitee.hengboy.builder.core.database.DataBaseFactory;
-import com.gitee.hengboy.builder.core.engine.EngineTemplate;
-import com.gitee.hengboy.builder.core.engine.EngineTemplateFactory;
+import com.gitee.hengboy.builder.core.invoke.CodeBuilderInvoke;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -159,10 +153,6 @@ public class CodeBuilderMojo
      * @throws MojoFailureException   mojo错误异常
      */
     public void execute() throws MojoExecutionException, MojoFailureException {
-        if (!execute) {
-            getLog().info("未开启自动代码生成，请配置【execute=true】");
-            return;
-        }
         try {
             /*
              * 组装代码生成器所需的实体参数
@@ -183,45 +173,15 @@ public class CodeBuilderMojo
                     .builderDir(builderDir)
                     .targetDir(targetDir)
                     .builder(builder)
+                    .engineTypeEnum(engineType)
                     .build();
-            // 获取数据库对象
-            DataBase dataBase = DataBaseFactory.newInstance(codeBuilderProperties);
-            // 获取驱动模板
-            EngineTemplate engineTemplate = EngineTemplateFactory.newInstance(engineType, dataBase, codeBuilderProperties);
-            // 获取表名列表
-            List<String> tableNames = getTables(dataBase);
-            // 执行循环自动生成文件
-            engineTemplate.loopProcess(tableNames);
-            // 关闭数据库连接
-            dataBase.closeConnection();
+
+            // 执行代码生成
+            CodeBuilderInvoke.invoke(codeBuilderProperties);
+
         } catch (Exception e) {
-            e.printStackTrace();
+            getLog().error("Invoke have errors ：" + e.getMessage());
         }
 
-    }
-
-    /**
-     * 获取需要自动生成的表列表
-     *
-     * @param dataBase 数据库对象实例
-     * @return
-     */
-    List<String> getTables(DataBase dataBase) {
-        /*
-         * 根据配置tables参数表名进行构建生成
-         * 优先级高于generatorByPattern
-         */
-        if (null != tables && tables.size() > 0) {
-            getLog().info("Using table name to generate code automatically, please wait...");
-            return tables;
-        }
-        /*
-         * 如果配置generatorByPattern参数，优先级高于tables
-         */
-        else if (StringUtil.isNotEmpty(generatorByPattern)) {
-            getLog().info("Using expression method to generate code automatically, please wait...");
-            return dataBase.getTableNames(generatorByPattern);
-        }
-        throw new CodeBuilderException(ErrorEnum.NO_BUILDER_TABLE);
     }
 }

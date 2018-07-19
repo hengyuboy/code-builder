@@ -25,12 +25,59 @@ Mybatis Enhance ：782540319
 目前`code-builder`内部采用了`freemarker`模板来完成实体类的自动生成，模板由使用者来自定义编写，内部预留了使用其他模板的方式，如果你需要使用别的模板，如：`Velocity`，对应添加生成的实现业务逻辑即可。
 
 ### 怎么配置？
+#### SpringBoot 方式配置
+在`1.0.3.RELEASE`版本添加了集成`SpringBoot`的`starter`，依赖如下所示：
+- 使用`Maven`构建工具时，复制下面的内容到`pom.xml`配置文件内
+```
+<dependency>
+    <groupId>com.gitee.hengboy</groupId>
+    <artifactId>code-builder-spring-boot-starter</artifactId>
+    <version>1.0.3.RELEASE</version>
+</dependency>
+```
+- 如果你是用的`Gradle`构建工具，那么复制下面的内容到你的`build.gradle`
+```
+compile group: 'com.gitee.hengboy', name: 'code-builder-spring-boot-starter', version: '1.0.3.RELEASE'
+```
+那么我们在`application.yml`或者`application.properties`配置文件内该怎么配置相关的参数呢？
+```
+hengboy:
+  code:
+    builder:
+      execute: true
+      configuration:
+        package-prefix: com.code.builder.sample.codebuildersample
+        templates:
+          -
+            name: entity.ftl
+            packageName: model
+            fileSuffix: Entity
+          -
+            name: service.ftl
+            packageName: service
+            fileSuffix: Service
+          -
+            name: controller.ftl
+            packageName: controller
+            fileSuffix: Controller
+      generator-by-pattern: '%app_user_info%'
+      db-type: mysql
+      engine-type-enum: freemarker
+      builder-dir: classes.templates.builder
+      target-dir: generated-sources.java
+      tables:
+        - app_shop_type
+        - app_user_exchange_good
+      ignore-class-prefix: App
+```
+> 每个参数的具体介绍请往下看。
+#### Maven Plugin 方式配置
 由于`code-builder`是`Maven mojo`插件的形式创建的，所以我们只需要在项目的`pom.xml`文件内添加`plugin`插件配置，如下所示：
 ```
 <plugin>
     <groupId>com.gitee.hengboy</groupId>
-    <artifactId>code-builder</artifactId>
-    <version>1.0.2.RELEASE</version>
+    <artifactId>code-builder-maven-plugin</artifactId>
+    <version>1.0.3.RELEASE</version>
     <executions>
         <execution>
             <goals>
@@ -101,12 +148,12 @@ Mybatis Enhance ：782540319
 - `true`：开启自动生成
 - `false`：关闭自动生成
 
-#### 数据库类型配置
+#### 数据库类型配置 
 执行自动生成前需要配置数据库的相关配置信息
 - `dbType`：数据库类型，默认使用`MySQL`数据库类型。
-- `dbDriverClassName`：数据库驱动类名，根据不用的数据库类型配置不同的驱动类名，默认根据`dbType`使用内部定义的类名，如需自定义可以设置。
+- `dbDriverClassName`：数据库驱动类名，根据不用的数据库类型配置不同的驱动类名，默认根据`dbType`使用内部定义的类名，如需自定义可以设置。`（仅maven-plugin使用）`
 
-#### 数据库基本信息配置
+#### 数据库基本信息配置 （仅maven-plugin使用）
 - `dbName`：数据库名称
 - `dbUserName`：数据库用户名
 - `dbPassword`：数据库密码
@@ -312,5 +359,14 @@ public class BalanceTypeEntity {
 ```
 则最终创建的生成根目录为：`target/generated-sources/java/com/code/builder/sample`
 ### 怎么使用？
+#### SpringBoot 方式使用
+1. `运行项目`就可以根据配置生成对应的文件
+#### Maven Plugin 方式使用
 1. 执行`mvn clean`命令用于清空`target`目录下的内容
 2. 执行`mvn compile`命令编译项目并且生成`实体类`
+ 
+### 为什么SpringBoot方式不用配置数据库信息？
+`Maven Plugin`方式是通过配置的`数据库连接信息`以及数据库连接驱动获取数据库连接对象`Connection`后来操作`JDBC元数据`。
+
+而`SpringBoot`方式则是直接使用项目中配置的`DataSource`对象实例来进行获取的`Connection`数据库连接对象后来操作`JDBC元数据`。
+> 注意：如果你是多数据源项目，默认会使用`primary`数据源实例。

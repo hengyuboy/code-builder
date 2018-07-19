@@ -1,0 +1,3 @@
+#配置code-builder自动化配置
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.gitee.hengboy.builder.spring.boot.autoconfigure.CodeBuilderAutoConfiguration

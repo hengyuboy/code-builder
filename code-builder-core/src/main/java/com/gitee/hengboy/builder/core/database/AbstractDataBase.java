@@ -1,18 +1,18 @@
 package com.gitee.hengboy.builder.core.database;
 /**
- *  Copyright 2018 恒宇少年
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Copyright 2018 恒宇少年
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 import com.gitee.hengboy.builder.common.CodeBuilderProperties;
@@ -72,16 +72,23 @@ public abstract class AbstractDataBase implements DataBase {
              * 重新获取连接
              */
             if (connection == null || connection.isClosed()) {
-                // 默认使用数据库驱动类型内的限定类名
-                String driverClassName = codeBuilderProperties.getDbType().getValue();
-                // 存在自定义的驱动限定类名时使用自定义来实例化驱动对象
-                if (StringUtil.isNotEmpty(codeBuilderProperties.getDbDriverClassName())) {
-                    driverClassName = codeBuilderProperties.getDbDriverClassName();
+                // spring-boot-starter方式获取数据库连接
+                if (codeBuilderProperties.getDataSource() != null) {
+                    connection = codeBuilderProperties.getDataSource().getConnection();
                 }
-                //加载驱动程序
-                Class.forName(driverClassName);
-                // 获取数据库连接
-                connection = DriverManager.getConnection(codeBuilderProperties.getDbUrl(), codeBuilderProperties.getDbUserName(), codeBuilderProperties.getDbPassword());
+                // maven-plugin插件形式获取数据库连接
+                else {
+                    // 默认使用数据库驱动类型内的限定类名
+                    String driverClassName = codeBuilderProperties.getDbType().getValue();
+                    // 存在自定义的驱动限定类名时使用自定义来实例化驱动对象
+                    if (StringUtil.isNotEmpty(codeBuilderProperties.getDbDriverClassName())) {
+                        driverClassName = codeBuilderProperties.getDbDriverClassName();
+                    }
+                    //加载驱动程序
+                    Class.forName(driverClassName);
+                    // 获取数据库连接
+                    connection = DriverManager.getConnection(codeBuilderProperties.getDbUrl(), codeBuilderProperties.getDbUserName(), codeBuilderProperties.getDbPassword());
+                }
             }
             return connection;
         } catch (Exception e) {

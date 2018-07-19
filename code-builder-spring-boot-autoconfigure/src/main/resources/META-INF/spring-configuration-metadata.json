@@ -1,0 +1,89 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.gitee.hengboy.builder.spring.boot.autoconfigure.BuilderAutoConfigureProperties",
+      "name": "hengboy.code.builder",
+      "type": "com.gitee.hengboy.builder.spring.boot.autoconfigure.BuilderAutoConfigureProperties"
+    },
+    {
+      "sourceType": "com.gitee.hengboy.builder.spring.boot.autoconfigure.BuilderAutoConfigureProperties",
+      "name": "hengboy.code.builder.configuration",
+      "sourceMethod": "getConfiguration()",
+      "type": "com.gitee.hengboy.builder.core.configuration.BuilderConfiguration"
+    },
+    {
+      "sourceType": "com.gitee.hengboy.builder.core.configuration.BuilderConfiguration",
+      "name": "hengboy.code.builder.configuration.templates",
+      "sourceMethod": "getTemplates()",
+      "type": "com.gitee.hengboy.builder.core.configuration.TemplateConfiguration"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.gitee.hengboy.builder.spring.boot.autoconfigure.BuilderAutoConfigureProperties",
+      "defaultValue": false,
+      "name": "hengboy.code.builder.execute",
+      "description": "是否执行自动生成，默认值：false（不执行）",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "com.gitee.hengboy.builder.spring.boot.autoconfigure.BuilderAutoConfigureProperties",
+      "name": "hengboy.code.builder.ignore-class-prefix",
+      "description": "排除生成后实体类的前缀",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.gitee.hengboy.builder.spring.boot.autoconfigure.BuilderAutoConfigureProperties",
+      "name": "hengboy.code.builder.generator-by-pattern",
+      "description": "根据表达式匹配数据表进行生成",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.gitee.hengboy.builder.spring.boot.autoconfigure.BuilderAutoConfigureProperties",
+      "name": "hengboy.code.builder.tables",
+      "description": "根据指定表名称集合进行生成",
+      "type": "java.util.List<java.lang.String>"
+    },
+    {
+      "sourceType": "com.gitee.hengboy.builder.spring.boot.autoconfigure.BuilderAutoConfigureProperties",
+      "name": "hengboy.code.builder.db-type",
+      "defaultValue": "MySQL",
+      "description": "数据库类型，默认MySQL",
+      "type": "com.gitee.hengboy.builder.common.enums.DbTypeEnum"
+    },
+    {
+      "sourceType": "com.gitee.hengboy.builder.spring.boot.autoconfigure.BuilderAutoConfigureProperties",
+      "name": "hengboy.code.builder.engine-type-enum",
+      "defaultValue": "FREEMARKER",
+      "description": "驱动模板类型，默认Freemarker",
+      "type": "com.gitee.hengboy.builder.common.enums.EngineTypeEnum"
+    },
+    {
+      "sourceType": "com.gitee.hengboy.builder.spring.boot.autoconfigure.BuilderAutoConfigureProperties",
+      "name": "hengboy.code.builder.builder-dir",
+      "defaultValue":"classes.templates.builder",
+      "description": "CodeBuilder根目录",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.gitee.hengboy.builder.spring.boot.autoconfigure.BuilderAutoConfigureProperties",
+      "name": "hengboy.code.builder.target-dir",
+      "defaultValue":"generated-sources.java",
+      "description": "CodeBuilder生成后实体类的根路径",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.gitee.hengboy.builder.core.configuration.BuilderConfiguration",
+      "name": "hengboy.code.builder.configuration.package-prefix",
+      "description": "生成实体类的包名(package)前缀",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "hengboy.code.builder.configuration.templates",
+      "sourceType": "com.gitee.hengboy.builder.core.configuration.BuilderConfiguration",
+      "description": "模板列表",
+      "type": "java.util.List<com.gitee.hengboy.builder.core.configuration.TemplateConfiguration>"
+    }
+  ]
+}
