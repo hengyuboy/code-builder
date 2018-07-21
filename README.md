@@ -1,6 +1,4 @@
-## 欢迎使用代码生成器code-builder
-
-[toc]
+## 欢迎使用代码生成器Code-Builder
 
 ### 加入群聊
 SpringBoot 核心技术①：373229384 （满）
