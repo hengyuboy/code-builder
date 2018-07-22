@@ -1,5 +1,4 @@
 ## 欢迎使用代码生成器Code-Builder
-
 [![Maven central](https://maven-badges.herokuapp.com/maven-central/com.gitee.hengboy/code-builder-spring-boot-starter/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.gitee.hengboy/code-builder-spring-boot-starter)
 
 ### 欢迎关注公众号
