@@ -2,8 +2,14 @@
 
 ### 加入群聊
 SpringBoot 核心技术①：373229384 （满）
-SpringBoot 核心技术②：588351309
-Mybatis Enhance ：782540319
+SpringBoot 核心技术②：58835130
+Mybatis Enhance ：78254031
+
+[![Maven central](https://maven-badges.herokuapp.com/maven-central/com.gitee.hengboy/code-builder-spring-boot-starter/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.gitee.hengboy/code-builder-spring-boot-starter)
+
+### 欢迎关注公众号
+
+![微信公众号](http://resource.hengboy.com/image/qrcode.jpg)
 
 ### 背景
 本来`code-builder`是专门为`MyBatis Enhance`来编写的一块代码生成器
