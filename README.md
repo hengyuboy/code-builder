@@ -10,6 +10,7 @@ Mybatis Enhance ：78254031
 ### 欢迎关注公众号
 
 ![微信公众号](http://resource.hengboy.com/image/qrcode.jpg)
+关注微信公众号，回复`加群`，获取交流群群号。
 
 ### 背景
 本来`code-builder`是专门为`MyBatis Enhance`来编写的一块代码生成器
