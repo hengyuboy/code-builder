@@ -186,9 +186,14 @@ public abstract class AbstractEngineTemplate implements EngineTemplate {
      */
     protected String getTemplateClassName(TemplateConfiguration templateConfiguration, String entityName) {
         StringBuffer className = new StringBuffer();
+        // 追加文件前缀名
+        if (StringUtil.isNotEmpty(templateConfiguration.getFilePrefix())) {
+            className.append(StringUtil.getCamelCaseString(templateConfiguration.getFilePrefix(), true));
+        }
+        // 实体类名称
         className.append(entityName);
+        // 追加文件后缀名
         if (StringUtil.isNotEmpty(templateConfiguration.getFileSuffix())) {
-            // 首字母大写
             className.append(StringUtil.getCamelCaseString(templateConfiguration.getFileSuffix(), true));
         }
         return className.toString();

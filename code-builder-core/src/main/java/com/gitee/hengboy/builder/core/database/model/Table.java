@@ -43,6 +43,10 @@ public class Table {
      */
     private String tableName;
     /**
+     * 表驼峰名称
+     */
+    private String tableCamelName;
+    /**
      * 表类型
      */
     private String tableType;
