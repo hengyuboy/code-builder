@@ -25,18 +25,18 @@
 
 ### 怎么配置？
 #### SpringBoot 方式配置
-在`1.0.3.RELEASE`版本添加了集成`SpringBoot`的`starter`，依赖如下所示：
+在`1.0.4.RELEASE`版本添加了集成`SpringBoot`的`starter`，依赖如下所示：
 - 使用`Maven`构建工具时，复制下面的内容到`pom.xml`配置文件内
 ```
 <dependency>
     <groupId>com.gitee.hengboy</groupId>
     <artifactId>code-builder-spring-boot-starter</artifactId>
-    <version>1.0.3.RELEASE</version>
+    <version>1.0.4.RELEASE</version>
 </dependency>
 ```
 - 如果你是用的`Gradle`构建工具，那么复制下面的内容到你的`build.gradle`
 ```
-compile group: 'com.gitee.hengboy', name: 'code-builder-spring-boot-starter', version: '1.0.3.RELEASE'
+compile group: 'com.gitee.hengboy', name: 'code-builder-spring-boot-starter', version: '1.0.4.RELEASE'
 ```
 那么我们在`application.yml`或者`application.properties`配置文件内该怎么配置相关的参数呢？
 ```
@@ -76,7 +76,7 @@ hengboy:
 <plugin>
     <groupId>com.gitee.hengboy</groupId>
     <artifactId>code-builder-maven-plugin</artifactId>
-    <version>1.0.3.RELEASE</version>
+    <version>1.0.4.RELEASE</version>
     <executions>
         <execution>
             <goals>
