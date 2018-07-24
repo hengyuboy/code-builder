@@ -322,7 +322,7 @@ import java.sql.Timestamp;
  * Created with code-builder.
  * User：恒宇少年
  * Date：Jul 17, 2018 9:09:13 PM
- * 简书：http://www.jianshTu.com/u/092df3f77bca
+ * 简书：http://www.jianshu.com/u/092df3f77bca
  * 码云：https://gitee.com/hengboy
  * ================================
  */
