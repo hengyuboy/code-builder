@@ -10,6 +10,8 @@
         <module>code-builder-spring-boot-starter</module>
         <module>code-builder-spring-boot-autoconfigure</module>
         <module>code-builder-maven-plugin</module>
+        <module>code-builder-maven-plugin-sample</module>
+        <module>code-builder-spring-boot-starter-sample</module>
     </modules>
     <name>code-builder</name>
     <url>http://maven.apache.org</url>
