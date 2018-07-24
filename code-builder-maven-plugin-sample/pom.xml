@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>code-builder</artifactId>
+        <groupId>com.gitee.hengboy</groupId>
+        <version>1.0.4.RELEASE</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <name>Code-Builder Maven插件示例</name>
+    <artifactId>code-builder-maven-plugin-sample</artifactId>
+    <description>
+        集成code-builder-maven-plugin插件形式
+    </description>
+
+    <dependencies>
+        <!--mybatis-enhance依赖-->
+        <!--该依赖只是方便entity.ftl模板演示-->
+        <dependency>
+            <groupId>com.gitee.hengboy</groupId>
+            <artifactId>mybatis-enhance-spring-boot-starter</artifactId>
+            <version>1.0.3.RELEASE</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--code-builder插件集成-->
+            <plugin>
+                <groupId>com.gitee.hengboy</groupId>
+                <artifactId>code-builder-maven-plugin</artifactId>
+                <version>1.0.4.RELEASE</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generator</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <!--添加数据库驱动依赖-->
+                <!---->
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.46</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+
+                    <!--true：执行生成，false：不执行生成-->
+                    <execute>true</execute>
+                    <!--数据库类型，默认MySQL-->
+                    <!--<dbType>MySQL</dbType>-->
+
+                    <!--数据库驱动限定类名，默认com.mysql.jdbc.Driver-->
+                    <!--<dbDriverClassName>com.mysql.jdbc.Driver</dbDriverClassName>-->
+
+                    <dbName>xxxx</dbName>
+                    <dbUserName>xxxxx</dbUserName>
+                    <dbPassword>xxxx</dbPassword>
+                    <dbUrl>jdbc:mysql://xxx.xxx.xx.xxx:3306</dbUrl>
+
+                    <!--指定生成的表名列表-->
+                    <tables>
+                        <table>sys_menu_info</table>
+                        <table>sys_role_info</table>
+                    </tables>
+
+                    <!--模板类型，默认FREEMARKER-->
+                    <!--<engineType>FREEMARKER</engineType>-->
+
+                    <!--生成表达式，与like查询语法一致，优先级低于tables配置-->
+                    <!--<generatorByPattern>%app_balance_type%</generatorByPattern>-->
+
+                    <!--替换生成实体类后的前缀为空-->
+                    <ignoreClassPrefix>Sys</ignoreClassPrefix>
+
+                    <!--builder根目录，默认：classes.templates.builder-->
+                    <!--<builderDir>classes.templates.builder</builderDir>-->
+
+                    <!--生成实体类目标位置，classes/generated-sources/java-->
+                    <!--<targetDir>generated-sources.java</targetDir>-->
+                    <builder>
+                        <!--生成实体类后的包名前缀-->
+                        <packagePrefix>com.code.builder.sample</packagePrefix>
+
+                        <!--模板列表-->
+                        <templates>
+                            <!--实体类模板配置-->
+                            <template>
+                                <!--entity.ftl对应resources/templates/builder/freemarker/entity.ftl-->
+                                <name>entity.ftl</name>
+                                <!--生成后实体类的子包名-->
+                                <packageName>model</packageName>
+                                <!--实体类后缀-->
+                                <fileSuffix>entity</fileSuffix>
+                            </template>
+                            <!--多个模板，继续配置template-->
+                        </templates>
+                    </builder>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
