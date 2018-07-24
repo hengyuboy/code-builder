@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>code-builder</artifactId>
+        <groupId>com.gitee.hengboy</groupId>
+        <version>1.0.4.RELEASE</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <name>Code-Builder SpringBoot Starter示例</name>
+    <artifactId>code-builder-spring-boot-starter-sample</artifactId>
+    <description>
+        集成code-builder-spring-boot-starter形式
+    </description>
+
+    <dependencies>
+        <!--mybatis-enhance依赖-->
+        <!--该依赖只是方便entity.ftl模板演示-->
+        <dependency>
+            <groupId>com.gitee.hengboy</groupId>
+            <artifactId>mybatis-enhance-spring-boot-starter</artifactId>
+            <version>1.0.3.RELEASE</version>
+        </dependency>
+
+        <!--code-builder依赖-->
+        <dependency>
+            <groupId>com.gitee.hengboy</groupId>
+            <artifactId>code-builder-spring-boot-starter</artifactId>
+            <version>1.0.4.RELEASE</version>
+        </dependency>
+    </dependencies>
+</project>

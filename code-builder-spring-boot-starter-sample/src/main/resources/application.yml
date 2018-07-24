@@ -1,0 +1,50 @@
+spring:
+  # spring boot starter 方式code-builder会使用项目的数据源作为读取数据库元数据的连接
+  datasource:
+    druid:
+      url: jdbc:mysql://xxx.xxx.xxx.xx:3306/xxxx?characterEncoding=utf8
+      driver-class-name: com.mysql.jdbc.Driver
+      username: xxxxx
+      password: xxxx
+
+# code-builder插件配置
+hengboy:
+  code:
+    builder:
+      # true：执行生成，false：不执行生成
+      execute: true
+      configuration:
+        # 生成实体类后的包名前缀
+        package-prefix: com.code.builder.sample
+        # 模板列表，可配置多个
+        templates:
+          -
+            # entity.ftl对应resources/templates/builder/freemarker/entity.ftl
+            name: entity.ftl
+            # 生成后实体类的子包名
+            packageName: model
+            # 实体类后缀
+            fileSuffix: Entity
+      # 生成表达式，与like查询语法一致，优先级低于tables配置
+      # generator-by-pattern: '%app_user_info%'
+
+      # 数据库类型，默认mysql
+      # db-type: mysql
+
+      # 模板驱动类型，默认freemarker
+      # engine-type-enum: freemarker
+
+      # builder根目录，默认：classes.templates.builder
+      # builder-dir: classes.templates.builder
+
+      # 生成实体类目标位置，classes/generated-sources/java
+      # target-dir: generated-sources.java
+
+      # 指定生成的表名列表
+      tables:
+        - sys_menu_info
+        - sys_role_info
+
+      # 替换生成实体类后的前缀为空
+      ignore-class-prefix: Sys
+
