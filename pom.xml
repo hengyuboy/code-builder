@@ -4,7 +4,7 @@
     <groupId>com.gitee.hengboy</groupId>
     <artifactId>code-builder</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.4.RELEASE</version>
+    <version>1.0.5.RELEASE</version>
     <modules>
         <module>code-builder-core</module>
         <module>code-builder-spring-boot-starter</module>
@@ -23,9 +23,9 @@
         <freemarker.version>2.3.28</freemarker.version>
         <slf4j.version>1.7.25</slf4j.version>
         <!--Builder Core Version-->
-        <code.builder.core.version>1.0.4.RELEASE</code.builder.core.version>
+        <code.builder.core.version>1.0.5.RELEASE</code.builder.core.version>
         <!--Builder Autoconfigure Version-->
-        <code.builder.autoconfigure.version>1.0.4.RELEASE</code.builder.autoconfigure.version>
+        <code.builder.autoconfigure.version>1.0.5.RELEASE</code.builder.autoconfigure.version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -79,7 +79,7 @@
         <connection>scm:git:https://gitee.com/hengboy/code-builder</connection>
         <developerConnection>scm:git:https://gitee.com/hengboy/code-builder</developerConnection>
         <url>https://gitee.com/hengboy/code-builder</url>
-        <tag>1.0.4.RELEASE</tag>
+        <tag>1.0.5.RELEASE</tag>
     </scm>
     <distributionManagement>
         <snapshotRepository>
@@ -91,9 +91,9 @@
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
-    <build>
+    <!--<build>
         <plugins>
-            <!-- Source -->
+            &lt;!&ndash; Source &ndash;&gt;
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -107,7 +107,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- Javadoc -->
+            &lt;!&ndash; Javadoc &ndash;&gt;
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -121,7 +121,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- Gpg Signature -->
+            &lt;!&ndash; Gpg Signature &ndash;&gt;
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
@@ -137,5 +137,5 @@
                 </executions>
             </plugin>
         </plugins>
-    </build>
+    </build>-->
 </project>

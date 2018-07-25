@@ -36,7 +36,7 @@ public class BuilderAutoConfigureProperties {
     private DbTypeEnum dbType = DbTypeEnum.MySQL;
     private EngineTypeEnum engineTypeEnum = EngineTypeEnum.FREEMARKER;
     private String projectBaseDir;
-    private String builderDir = "classes.templates.builder";
-    private String targetDir = "generated-sources.java";
+    private String builderDir = "target.classes.templates.builder";
+    private String targetDir = "target.generated-sources.java";
     private BuilderConfiguration configuration;
 }

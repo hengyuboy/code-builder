@@ -1,4 +1,14 @@
 ## 欢迎使用代码生成器Code-Builder
+
+#### 更新记录
+
+- 1.0.5.RELEASE
+   - 添加模板前缀参数`filePrefix`
+   - 修改项目根地址排除`target`
+   - 生成完成后输出本次执行信息
+
+
+#### Maven Center 版本
 [![Maven central](https://maven-badges.herokuapp.com/maven-central/com.gitee.hengboy/code-builder-spring-boot-starter/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.gitee.hengboy/code-builder-spring-boot-starter)
 
 ### 欢迎关注公众号
@@ -25,18 +35,18 @@
 
 ### 怎么配置？
 #### SpringBoot 方式配置
-在`1.0.4.RELEASE`版本添加了集成`SpringBoot`的`starter`，依赖如下所示：
+在`1.0.5.RELEASE`版本添加了集成`SpringBoot`的`starter`，依赖如下所示：
 - 使用`Maven`构建工具时，复制下面的内容到`pom.xml`配置文件内
 ```
 <dependency>
     <groupId>com.gitee.hengboy</groupId>
     <artifactId>code-builder-spring-boot-starter</artifactId>
-    <version>1.0.4.RELEASE</version>
+    <version>1.0.5.RELEASE</version>
 </dependency>
 ```
 - 如果你是用的`Gradle`构建工具，那么复制下面的内容到你的`build.gradle`
 ```
-compile group: 'com.gitee.hengboy', name: 'code-builder-spring-boot-starter', version: '1.0.4.RELEASE'
+compile group: 'com.gitee.hengboy', name: 'code-builder-spring-boot-starter', version: '1.0.5.RELEASE'
 ```
 那么我们在`application.yml`或者`application.properties`配置文件内该怎么配置相关的参数呢？
 ```
@@ -76,7 +86,7 @@ hengboy:
 <plugin>
     <groupId>com.gitee.hengboy</groupId>
     <artifactId>code-builder-maven-plugin</artifactId>
-    <version>1.0.4.RELEASE</version>
+    <version>1.0.5.RELEASE</version>
     <executions>
         <execution>
             <goals>

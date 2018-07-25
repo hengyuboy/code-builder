@@ -119,7 +119,7 @@ public class CodeBuilderMojo
     /**
      * 项目根地址
      */
-    @Parameter(defaultValue = "${project.build.directory}")
+    @Parameter(defaultValue = "${basedir}")
     private String projectBaseDir;
 
     /**
@@ -128,13 +128,13 @@ public class CodeBuilderMojo
      * 因为linux、osx、windows下的分隔符不一样
      * 需要根据java获取系统的分隔符后格式化
      */
-    @Parameter(defaultValue = "classes.templates.builder")
+    @Parameter(defaultValue = "target.classes.templates.builder")
     private String builderDir;
 
     /**
      * 文件生成后目标根地址
      */
-    @Parameter(defaultValue = "generated-sources.java")
+    @Parameter(defaultValue = "target.generated-sources.java")
     private String targetDir;
     /**
      * 自动生成配置信息实体

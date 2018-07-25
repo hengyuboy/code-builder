@@ -70,7 +70,7 @@ public class CodeBuilderAutoConfiguration {
                             .generatorByPattern(builderAutoConfigureProperties.getGeneratorByPattern())
                             .ignoreClassPrefix(builderAutoConfigureProperties.getIgnoreClassPrefix())
                             // 项目根路径
-                            .projectBaseDir(ResourceUtils.getURL(CLASSPATH_URL_PREFIX).getPath().replace("classes/", ""))
+                            .projectBaseDir(ResourceUtils.getURL(CLASSPATH_URL_PREFIX).getPath().replace("/target/classes/", ""))
                             .builderDir(builderAutoConfigureProperties.getBuilderDir())
                             .targetDir(builderAutoConfigureProperties.getTargetDir())
                             .builder(builderAutoConfigureProperties.getConfiguration())

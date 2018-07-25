@@ -62,14 +62,14 @@
     {
       "sourceType": "com.gitee.hengboy.builder.spring.boot.autoconfigure.BuilderAutoConfigureProperties",
       "name": "hengboy.code.builder.builder-dir",
-      "defaultValue":"classes.templates.builder",
+      "defaultValue":"target.classes.templates.builder",
       "description": "CodeBuilder根目录",
       "type": "java.lang.String"
     },
     {
       "sourceType": "com.gitee.hengboy.builder.spring.boot.autoconfigure.BuilderAutoConfigureProperties",
       "name": "hengboy.code.builder.target-dir",
-      "defaultValue":"generated-sources.java",
+      "defaultValue":"target.generated-sources.java",
       "description": "CodeBuilder生成后实体类的根路径",
       "type": "java.lang.String"
     },

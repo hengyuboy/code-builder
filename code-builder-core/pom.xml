@@ -5,7 +5,7 @@
     <parent>
         <artifactId>code-builder</artifactId>
         <groupId>com.gitee.hengboy</groupId>
-        <version>1.0.4.RELEASE</version>
+        <version>1.0.5.RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>code-builder-core</artifactId>

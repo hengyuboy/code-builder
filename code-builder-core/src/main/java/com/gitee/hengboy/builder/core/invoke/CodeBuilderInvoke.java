@@ -43,6 +43,7 @@ public class CodeBuilderInvoke {
             logger.info("未开启自动代码生成，如需生成实体类请配置【execute=true】");
             return;
         }
+
         // 获取数据库对象
         DataBase dataBase = DataBaseFactory.newInstance(codeBuilderProperties);
         // 获取驱动模板

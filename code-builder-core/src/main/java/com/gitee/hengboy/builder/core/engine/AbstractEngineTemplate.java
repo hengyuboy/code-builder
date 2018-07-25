@@ -75,6 +75,19 @@ public abstract class AbstractEngineTemplate implements EngineTemplate {
     }
 
     /**
+     * 执行输出日志
+     * 打印本次执行的基本信息
+     *
+     * @param tablesSize 本次生成表格的数量
+     */
+    public void invokeConsoleLog(int tablesSize) {
+        logger.info("Code-Builder >>> 本次有{}个表参与生成.", tablesSize);
+        logger.info("Code-Builder >>> 执行项目目录：{}", getProjectDir());
+        logger.info("Code-Builder >>> 生成目录：{}", getBasePackageTargetDir());
+        logger.info("Code-Builder >>> Builder根目录：{}", getBaseBuilderDir());
+    }
+
+    /**
      * 循环生成文件
      *
      * @param tableNames 数据表列表
@@ -84,7 +97,8 @@ public abstract class AbstractEngineTemplate implements EngineTemplate {
             logger.info("Auto Builder Table > 【{}】", tableName);
             process(dataBase.getTable(tableName));
         }
-        logger.info("This Time builder {} tables", tableNames.size());
+        // 执行生成日志输出
+        invokeConsoleLog(tableNames.size());
     }
 
     /**
@@ -132,6 +146,7 @@ public abstract class AbstractEngineTemplate implements EngineTemplate {
         builderDir.append(codeBuilderProperties.getProjectBaseDir());
         // 系统分隔符
         builderDir.append(SEPARATOR);
+
         // builder根地址
         builderDir.append(codeBuilderProperties.getBuilderDir());
         // 系统分隔符
@@ -163,10 +178,12 @@ public abstract class AbstractEngineTemplate implements EngineTemplate {
      * @return 存在包名的目录根路径
      */
     protected String getBasePackageTargetDir() {
+        // 获取builder配置信息
         BuilderConfiguration builderConfiguration = codeBuilderProperties.getBuilder();
         StringBuffer basePackageDir = new StringBuffer();
         // 生成文件的目标根路径
         basePackageDir.append(getBaseTargetDir());
+
         // 是否存在自定义的package前缀
         // 存在前缀添加到路径内
         if (StringUtil.isNotEmpty(builderConfiguration.getDiffSysPackagePrefix())) {
@@ -235,6 +252,7 @@ public abstract class AbstractEngineTemplate implements EngineTemplate {
     protected void loopCreatePackage(TemplateConfiguration templateConfiguration) {
         // 目录地址
         StringBuffer basePackagePath = new StringBuffer();
+        // 目标根地址
         basePackagePath.append(getBasePackageTargetDir());
         // 模板生成文件目标独有的package
         if (StringUtil.isNotEmpty(templateConfiguration.getPackageName())) {
